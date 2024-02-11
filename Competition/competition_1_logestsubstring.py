@@ -11,6 +11,7 @@ class Competition():
         """
         Algorithm from tao
         """
+        print("This is Tao na krub")
 
     def kantong_algorithm(self):
         """
