@@ -21,6 +21,7 @@ class Competition():
         """
         Algorithm from tao
         """
+        print("Mua hehehe")
 
     def ton_algorithm(self):
         """
