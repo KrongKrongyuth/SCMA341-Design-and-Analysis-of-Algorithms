@@ -19,42 +19,41 @@ class Competition():
         if common_chars == set() :
             print("There is no common substring found between the two texts")
             return 0,0,None
-
-        #max_length จะเก็บค่าความยาวที่มากที่สุดของ subtext ที่เหมือนกัน
-        max_length = 0
-        #start_index จะเอาไว้เช็คว่าตัวที่เริ่มเหมือนกัน(ดูจาก text1 เป็นหลัก) ว่าอยู่ index ไหน
-        start_index = 0
-        #longest_common อันนี้เอาไว้ดูว่า subtext ที่ซ้ำกันคืออะไรเผื่อเฉยๆ อจ.ไม่ได้สั่ง
-        longest_common = ""
-        for char in common_chars:
-        # i จะเป็น index ส่วน c จะเป็นตัวอักษร
-        # ในที่นี้ indices1 และ indices2 จะให้มันเก็บค่า index (i) อย่างเดียว
-        # แต่ให้มันเก็บเฉพาะตอนที่ตัวอักษร(c) ตรงกับ char ที่อยู่ในเซตของตัวอักษรที่ซ้ำกันอย่างเดียว
-        # Find indices of char in text1
-            indices1 = [i for i, c in enumerate(self.text_1) if c == char]
-            '''print(indices1)'''
-        # Find indices of char in text2
-            indices2 = [i for i, c in enumerate(self.text_2) if c == char]
-            '''print(indices2)'''
-
-        #check index ทุกคู่
-            for i1 in indices1:
-                for i2 in indices2:
-                    length = 0
-                    #ถ้า index + ความยาว(length อันนี้เป็นตัวเลื่อน index)แล้วมันยังไม่เกินความยาวของ text1 และ 2
-                    #รวมทั้งถ้าตัวที่เช็คอยู่มันเหมือนกันจะให้เพิ่ม length ไป 1
-                    #ถ้าไม่เข้าเงื่อนไข จะไปเปลี่ยน i2 กับ i1 จนดูครบทุกคู่ที่เป็นไปได้
-                    while (i1 + length < len(self.text_1) and i2 + length < len(self.text_2) and
-                       self.text_1[i1 + length] == self.text_2[i2 + length]):
-                        length += 1
+        else:
+            #max_length จะเก็บค่าความยาวที่มากที่สุดของ subtext ที่เหมือนกัน
+            max_length = 0
+            #start_index จะเอาไว้เช็คว่าตัวที่เริ่มเหมือนกัน(ดูจาก text1 เป็นหลัก) ว่าอยู่ index ไหน
+            start_index = 0
+            #longest_common อันนี้เอาไว้ดูว่า subtext ที่ซ้ำกันคืออะไรเผื่อเฉยๆ อจ.ไม่ได้สั่ง
+            longest_common = ""
+            for char in common_chars:
+            # i จะเป็น index ส่วน c จะเป็นตัวอักษร
+            # ในที่นี้ indices1 และ indices2 จะให้มันเก็บค่า index (i) อย่างเดียว
+            # แต่ให้มันเก็บเฉพาะตอนที่ตัวอักษร(c) ตรงกับ char ที่อยู่ในเซตของตัวอักษรที่ซ้ำกันอย่างเดียว
+            # Find indices of char in text1
+                indices1 = [i for i, c in enumerate(self.text_1) if c == char]
+                '''print(indices1)'''
+            # Find indices of char in text2
+                indices2 = [i for i, c in enumerate(self.text_2) if c == char]
+                '''print(indices2)'''
+            #check index ทุกคู่
+                for i1 in indices1:
+                    for i2 in indices2:
+                        length = 0
+                        #ถ้า index + ความยาว(length อันนี้เป็นตัวเลื่อน index)แล้วมันยังไม่เกินความยาวของ text1 และ 2
+                        #รวมทั้งถ้าตัวที่เช็คอยู่มันเหมือนกันจะให้เพิ่ม length ไป 1
+                        #ถ้าไม่เข้าเงื่อนไข จะไปเปลี่ยน i2 กับ i1 จนดูครบทุกคู่ที่เป็นไปได้
+                        while (i1 + length < len(self.text_1) and i2 + length < len(self.text_2) and
+                        self.text_1[i1 + length] == self.text_2[i2 + length]):
+                            length += 1
 
                 # Update max_length and start_index if longer common substring found
                 # Update ค่า ความยาวและ index ถ้ามี subtring ที่เหมือนกันอันใหม่ แต่มันยาวกว่า
-                    if length > max_length:
-                        max_length = length
-                        start_index = i1
-                        #จะ print คำ ก็ให้เริ่มจาก start index ที่ update แล้ว ไปถึง start index ที่ + ความยาวเข้าไป
-                        longest_common = self.text_1[start_index:start_index + max_length]
+                        if length > max_length:
+                            max_length = length
+                            start_index = i1
+                            #จะ print คำ ก็ให้เริ่มจาก start index ที่ update แล้ว ไปถึง start index ที่ + ความยาวเข้าไป
+                            longest_common = self.text_1[start_index:start_index + max_length]
         
         print(f"Starting index : {start_index}")
         print(f"Length of longest common substring : {max_length}")
