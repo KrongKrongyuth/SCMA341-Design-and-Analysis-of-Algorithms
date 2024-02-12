@@ -30,12 +30,12 @@ class Competition():
         possible_result, i = [], 0
         while i < len(self.text_1):
             j, k, word = 0, 0, ""
-            while j + k < len(self.text_2):
-                if (text_1[i+k] == text_2[j+k]):
-                    word += text_2[j+k]
+            while j < len(self.text_2):
+                if (text_1[i+k] == text_2[j]):
+                    word += text_2[j]
                     k += 1
+                elif k != 0: possible_result.append([word, k]); k = 0
                 j += 1
-            if k != 0: possible_result.append([word, k])
             i += 1
         result = possible_result[np.argmax(np.array(possible_result)[:,1])]
         print(f"\nLongest substring is \"{result[0]}\" with \"{result[1]}\" letters.\n")
