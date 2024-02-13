@@ -37,5 +37,3 @@ if __name__ == "__main__":
         print(f"{case} status: {result == test_case[case][2]}")
         messure_time(start_time, end_time)
         print("************************************************************")
-    
-    # print(Competition(text_1=test_case["case1"][0],text_2=test_case["case1"][1]).ton_algorithm())
