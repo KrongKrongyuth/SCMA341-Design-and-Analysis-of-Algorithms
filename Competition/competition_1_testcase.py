@@ -20,12 +20,15 @@ def messure_time(start, end):
     return end - start
 
 if __name__ == "__main__":
-    test_case = {"case1" : ["parachute",    "shuttle",   ["hut", 3]],
-                "case2" :  ["programming",  "program",   ["program", 7]],
-                "case3" :  ["abcdef",       "12345",     ["", 0]],
-                "case4" :  ["abcd",         "abcd",      ["abcd", 4]],
-                "case5" :  ["abcd",         "wxyz",      ["", 0]],
-                "case6" :  ["",             "",          ["", 0]]}
+    test_case = {"case1" : ["parachute",        "shuttle",          ["hut", 3]],
+                "case2" :  ["programming",      "program",          ["program", 7]],
+                "case3" :  ["abcdef",           "12345",            ["", 0]],
+                "case4" :  ["abcd",             "abcd",             ["abcd", 4]],
+                "case5" :  ["abcd",             "wxyz",             ["", 0]],
+                "case6" :  ["",                 "",                 ["", 0]],
+                "case7" :  ["abcdefg",          "bcdefgh",          ["bcdefg", 6]],
+                "case8" :  ["apple",            "olymppus",         ["pp", 2]],
+                "case9" :  ["abracadabra",      "cadabraabra",      ["cadabra", 7]],}
     subprocess.run(["clear"])                                                   # Clear terminal before checking.
 
     # Algorithm checking...
