@@ -77,7 +77,7 @@ class Competition():
         """
         import numpy as np
 
-        if len(self.text_1) == 0 or len(self.text_2):                                    # เช็คว่าถ้าจำนวนสมาชิกเป็น 0 ซักตัวจะ return เลย
+        if len(self.text_1) == 0 or len(self.text_2) == 0:                                    # เช็คว่าถ้าจำนวนสมาชิกเป็น 0 ซักตัวจะ return เลย
             print(f"\nLongest substring is \"\" with \"0\" letters.")
             return ["", 0]
 
