@@ -77,7 +77,7 @@ class Competition():
         """
         import numpy as np
 
-        if len(self.text_1) == 0 or len(self.text_2) == 0:                                    # เช็คว่าถ้าจำนวนสมาชิกเป็น 0 ซักตัวจะ return เลย
+        if len(self.text_1) == 0 or len(self.text_2) == 0:                               # เช็คว่าถ้าจำนวนสมาชิกเป็น 0 ซักตัวจะ return เลย
             print(f"\nLongest substring is \"\" with \"0\" letters.")
             return ["", 0]
 
@@ -100,4 +100,4 @@ class Competition():
             i += 1                                                                       # increasing condition for loop i.
         result = possible_result[np.argmax(np.array(possible_result)[:,1])]              # เก็บค่าผลลัพธ์ที่มากที่สุดไว้ในตัวแปร result.
         print(f"\nLongest substring is \"{result[0]}\" with \"{result[1]}\" letters.")   # ปริ้นท์ต่านั้นออกมา.
-        return result 
+        return result
