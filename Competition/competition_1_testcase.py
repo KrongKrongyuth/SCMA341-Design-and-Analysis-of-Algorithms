@@ -2,6 +2,7 @@
 This file use for test the algorithm correctness.
 """
 
+import subprocess
 from competition_1_logestsubstring import Competition
 from time import process_time
 
@@ -25,6 +26,7 @@ if __name__ == "__main__":
                 "case4" :  ["abcd",         "abcd",      ["abcd", 4]],
                 "case5" :  ["abcd",         "wxyz",      ["", 0]],
                 "case6" :  ["",             "",          ["", 0]]}
+    subprocess.run(["clear"])                                                   # Clear terminal before checking.
 
     # Algorithm checking...
     for case in test_case.keys():
@@ -33,7 +35,7 @@ if __name__ == "__main__":
 
         print(f"\n{case} is running...")
         start_time = process_time()                                             # Store the start of running time.
-        result = method.ton_algorithm()                                         # Change the method here
+        result = method.ton_algorithm()                                         # Change the method here.
         end_time = process_time()                                               # Store the end of running time.
         print(f"{case} status: {result == test_case[case][2]}")
         messure_time(start_time, end_time)
