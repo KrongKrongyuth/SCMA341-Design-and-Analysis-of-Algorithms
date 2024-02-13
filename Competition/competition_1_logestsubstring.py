@@ -28,6 +28,10 @@ class Competition():
         """
         import numpy as np
 
+        if len(self.text_1) == 0 or len(self.text_2):                                    # เช็คว่าถ้าจำนวนสมาชิกเป็น 0 ซักตัวจะ return เลย
+            print(f"\nLongest substring is \"\" with \"0\" letters.")
+            return ["", 0]
+
         possible_result, i = [], 0                                                       # สร้างตัวแปร possible_result มาเพื่อเก็บค่าของ [word -> คำที่ซ้ำ, k -> จำนวนอักษร], i -> iteration couter.
         while i < len(self.text_1):                                                      # while ใน self.text_1, iteration couter -> i.
             j, k, word = 0, 0, ""                                                        # j -> iteration couter, k -> letter couter, word -> letter collecter.

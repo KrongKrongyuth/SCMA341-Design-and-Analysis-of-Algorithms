@@ -23,7 +23,8 @@ if __name__ == "__main__":
                 "case2" :  ["programming",  "program",   ["program", 7]],
                 "case3" :  ["abcdef",       "12345",     ["", 0]],
                 "case4" :  ["abcd",         "abcd",      ["abcd", 4]],
-                "case5" :  ["abcd",         "wxyz",      ["", 0]]}
+                "case5" :  ["abcd",         "wxyz",      ["", 0]],
+                "case6" :  ["",             "",          ["", 0]]}
 
     # Algorithm checking...
     for case in test_case.keys():
@@ -31,9 +32,9 @@ if __name__ == "__main__":
         method = Competition(text_1=test_case[case][0],text_2=test_case[case][1])
 
         print(f"\n{case} is running...")
-        start_time = process_time()     # Store the start of running time.
-        result = method.ton_algorithm() # Change the method here
-        end_time = process_time()       # Store the end of running time.
+        start_time = process_time()                                             # Store the start of running time.
+        result = method.ton_algorithm()                                         # Change the method here
+        end_time = process_time()                                               # Store the end of running time.
         print(f"{case} status: {result == test_case[case][2]}")
         messure_time(start_time, end_time)
         print("************************************************************")
