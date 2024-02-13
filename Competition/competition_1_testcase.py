@@ -28,7 +28,8 @@ if __name__ == "__main__":
                 "case6" :  ["",                 "",                 ["", 0]],
                 "case7" :  ["abcdefg",          "bcdefgh",          ["bcdefg", 6]],
                 "case8" :  ["apple",            "olymppus",         ["pp", 2]],
-                "case9" :  ["abracadabra",      "cadabraabra",      ["cadabra", 7]],}
+                "case9" :  ["abracadabra",      "cadabraabra",      ["cadabra", 7]],
+                "case10":  ["a",                "bcdaet",           ["a", 1]]}
     subprocess.run(["clear"])                                                   # Clear terminal before checking.
 
     # Algorithm checking...
