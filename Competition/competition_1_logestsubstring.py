@@ -18,7 +18,7 @@ class Competition():
         #เราเช็คได้ทันทีว่า ถ้ามันไม่มีตัวอักษรที่เหมือนเลยจะได้เซตว่างแล้วหยุดการทำงานได้เลยไม่ต้อง run ต่อ
         if common_chars == set() :
             print("There is no common substring found between the two texts")
-            return 0,0,None
+            return ["",0]
         else:
             #max_length จะเก็บค่าความยาวที่มากที่สุดของ subtext ที่เหมือนกัน
             max_length = 0
@@ -59,7 +59,7 @@ class Competition():
         print(f"Length of longest common substring : {max_length}")
         print(f"Longest common substring : {longest_common}")
         
-        return start_index, max_length, longest_common
+        return [longest_common, max_length]
 
     def kantong_algorithm(self):
         """
@@ -75,8 +75,6 @@ class Competition():
         """
         Algorithm from ton
         """
-        import numpy as np
-
         if len(self.text_1) == 0 or len(self.text_2) == 0:                               # เช็คว่าถ้าจำนวนสมาชิกเป็น 0 ซักตัวจะ return เลย
             print(f"\nLongest substring is \"\" with \"0\" letters.")
             return ["", 0]
@@ -98,6 +96,6 @@ class Competition():
             if i == len(self.text_1) - 1 and possible_result == []:
                 possible_result.append(["", 0])                                          # ถ้าจบลูปสุดท้ายแล้วไม่มีอะไรที่ตรงเลยจะ append ["", 0]
             i += 1                                                                       # increasing condition for loop i.
-        result = possible_result[np.argmax(np.array(possible_result)[:,1])]              # เก็บค่าผลลัพธ์ที่มากที่สุดไว้ในตัวแปร result.
+        result = max(possible_result, key=len)                                           # เก็บค่าผลลัพธ์ที่มากที่สุดไว้ในตัวแปร result.
         print(f"\nLongest substring is \"{result[0]}\" with \"{result[1]}\" letters.")   # ปริ้นท์ต่านั้นออกมา.
         return result
