@@ -96,6 +96,7 @@ class Competition():
             if i == len(self.text_1) - 1 and possible_result == []:
                 possible_result.append(["", 0])                                          # ถ้าจบลูปสุดท้ายแล้วไม่มีอะไรที่ตรงเลยจะ append ["", 0]
             i += 1                                                                       # increasing condition for loop i.
-        result = max(possible_result, key=len)                                           # เก็บค่าผลลัพธ์ที่มากที่สุดไว้ในตัวแปร result.
+
+        result = max(possible_result, key = len)                                         # เก็บค่าผลลัพธ์ที่มากที่สุดไว้ในตัวแปร result.
         print(f"\nLongest substring is \"{result[0]}\" with \"{result[1]}\" letters.")   # ปริ้นท์ต่านั้นออกมา.
         return result
