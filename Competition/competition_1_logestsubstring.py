@@ -75,7 +75,10 @@ class Competition():
         """
         Algorithm from ton
         """
-        if len(self.text_1) == 0 or len(self.text_2) == 0:                               # เช็คว่าถ้าจำนวนสมาชิกเป็น 0 ซักตัวจะ return เลย
+        # print(set(self.text_1), set(self.text_2), set(self.text_1).intersection(set(self.text_2)), len(set(self.text_1).intersection(set(self.text_2))))
+        condition = len(self.text_1) == 0 or len(self.text_2) == 0 or len(set(self.text_1).intersection(set(self.text_2))) == 0
+        # print(condition)
+        if condition:                                                                    # เช็คว่าถ้าจำนวนสมาชิกเป็น 0/ไม่ซ้ำ return เลย
             print(f"\nLongest substring is \"\" with \"0\" letters.")
             return ["", 0]
 
@@ -93,10 +96,11 @@ class Competition():
             if k != 0:
                 possible_result.append([word, k])                                        # เม่ือผ่าน loop แล้ว k != 0 จะทำการเก็บค่าของ [word, k] ไว้ใน possible_result.
                 k = 0
-            if i == len(self.text_1) - 1 and possible_result == []:
-                possible_result.append(["", 0])                                          # ถ้าจบลูปสุดท้ายแล้วไม่มีอะไรที่ตรงเลยจะ append ["", 0]
+            # if i == len(self.text_1) - 1 and possible_result == []:
+            #     possible_result.append(["", 0])                                          # ถ้าจบลูปสุดท้ายแล้วไม่มีอะไรที่ตรงเลยจะ append ["", 0]
             i += 1                                                                       # increasing condition for loop i.
 
         result = max(possible_result, key = len)                                         # เก็บค่าผลลัพธ์ที่มากที่สุดไว้ในตัวแปร result.
+        print(possible_result, result)
         print(f"\nLongest substring is \"{result[0]}\" with \"{result[1]}\" letters.")   # ปริ้นท์ต่านั้นออกมา.
         return result
