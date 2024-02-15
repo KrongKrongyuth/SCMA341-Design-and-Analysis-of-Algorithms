@@ -31,7 +31,7 @@ if __name__ == "__main__":
                 "case9" :  ["abracadabra",      "cadabraabra",      (4, 0, 7)],
                 "case10":  ["a",                "bcdaet",           (0, 3, 1)],
                 "case11":  ["",                 "bcdaet",           (-1, -1, 0)]}
-    subprocess.run(["clear"])                                                   # Clear terminal before checking.
+#    subprocess.run(["cls"])                                                   # Clear terminal before checking.
 
     # Algorithm checking...
     for case in test_case.keys():
@@ -40,7 +40,7 @@ if __name__ == "__main__":
 
         print(f"\n{case} is running...")
         start_time = process_time()                                             # Store the start of running time.
-        result = method.ton_algorithm()                                         # Change the method here.
+        result = method.tao_algorithm()                                         # Change the method here.
         end_time = process_time()                                               # Store the end of running time.
         print(f"{case} status: {result == test_case[case][2]}")
         messure_time(start_time, end_time)
