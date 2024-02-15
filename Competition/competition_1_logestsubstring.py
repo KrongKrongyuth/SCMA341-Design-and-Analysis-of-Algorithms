@@ -75,32 +75,26 @@ class Competition():
         """
         Algorithm from ton
         """
-        # print(set(self.text_1), set(self.text_2), set(self.text_1).intersection(set(self.text_2)), len(set(self.text_1).intersection(set(self.text_2))))
         condition = len(self.text_1) == 0 or len(self.text_2) == 0 or len(set(self.text_1).intersection(set(self.text_2))) == 0
-        # print(condition)
-        if condition:                                                                    # เช็คว่าถ้าจำนวนสมาชิกเป็น 0/ไม่ซ้ำ return เลย
-            print(f"\nLongest substring is \"\" with \"0\" letters.")
-            return ["", 0]
+        if condition:
+            print(f"\nDon't match any substring.")
+            return (-1, -1, 0)
 
-        possible_result, i = [], 0                                                       # สร้างตัวแปร possible_result มาเพื่อเก็บค่าของ [word -> คำที่ซ้ำ, k -> จำนวนอักษร], i -> iteration couter.
-        while i < len(self.text_1):                                                      # while ใน self.text_1, iteration couter -> i.
-            j, k, word = 0, 0, ""                                                        # j -> iteration couter, k -> letter couter, word -> letter collecter.
-            while j < len(self.text_2):                                                  # while ใน self.text_2, iteration couter -> j.
-                if i + k < len(self.text_1) and self.text_1[i+k] == self.text_2[j]:      # เช็คว่าเจอตัวซ้ำมั้ย โดยถ้าเจอจะขยับขึ้นไปทีละ k หน่วย เพื่อไปยังตัวอักษรถัดไป.
-                    word += self.text_2[j]                                               # เก็บตัวอักษรที่เจอไว้ใน word.
-                    k += 1                                                               # เพิ่มค่าของ k ขึ้น 1 หน่วยเพื่อนับตัวซ้ำและใช้ในการขยับ.
-                elif k != 0:
-                    possible_result.append([word, k])                                    # กรณีที่ผ่าน if แล้ว k != 0 จะทำการเก็บค่าของ [word, k] ไว้ใน possible_result.
+        result, i, max_k = [], 0, 0
+        while i < len(self.text_1):
+            j, k = 0, 0
+            while j < len(self.text_2):
+                if i + k < len(self.text_1) and self.text_1[i+k] == self.text_2[j]: k += 1
+                elif k != 0 and k > max_k:
+                    max_k = k
+                    result = (i, j-k, max_k)
                     k = 0
-                j += 1                                                                   # increasing condition for loop j.
-            if k != 0:
-                possible_result.append([word, k])                                        # เม่ือผ่าน loop แล้ว k != 0 จะทำการเก็บค่าของ [word, k] ไว้ใน possible_result.
+                j += 1
+            if k != 0 and k > max_k:
+                max_k = k
+                result = (i, j-k, max_k)
                 k = 0
-            # if i == len(self.text_1) - 1 and possible_result == []:
-            #     possible_result.append(["", 0])                                          # ถ้าจบลูปสุดท้ายแล้วไม่มีอะไรที่ตรงเลยจะ append ["", 0]
-            i += 1                                                                       # increasing condition for loop i.
+            i += 1
 
-        result = max(possible_result, key = len)                                         # เก็บค่าผลลัพธ์ที่มากที่สุดไว้ในตัวแปร result.
-        print(possible_result, result)
-        print(f"\nLongest substring is \"{result[0]}\" with \"{result[1]}\" letters.")   # ปริ้นท์ต่านั้นออกมา.
+        print(f"\nFirst index: {result[0]}\nSecond index: {result[1]}\nLength: {result[2]} letters.")   # ปริ้นท์ต่านั้นออกมา.
         return result

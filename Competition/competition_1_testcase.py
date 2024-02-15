@@ -20,17 +20,17 @@ def messure_time(start, end):
     return end - start
 
 if __name__ == "__main__":
-    test_case = {"case1" : ["parachute",        "shuttle",          ["hut", 3]],
-                "case2" :  ["programming",      "program",          ["program", 7]],
-                "case3" :  ["abcdef",           "12345",            ["", 0]],
-                "case4" :  ["abcd",             "abcd",             ["abcd", 4]],
-                "case5" :  ["abcd",             "wxyz",             ["", 0]],
-                "case6" :  ["",                 "",                 ["", 0]],
-                "case7" :  ["abcdefg",          "bcdefgh",          ["bcdefg", 6]],
-                "case8" :  ["apple",            "olymppus",         ["pp", 2]],
-                "case9" :  ["abracadabra",      "cadabraabra",      ["cadabra", 7]],
-                "case10":  ["a",                "bcdaet",           ["a", 1]],
-                "case11":  ["",                 "bcdaet",           ["", 0]]}
+    test_case = {"case1" : ["parachute",        "shuttle",          (5, 1, 3)],
+                "case2" :  ["programming",      "program",          (0, 0, 7)],
+                "case3" :  ["abcdef",           "12345",            (-1, -1, 0)],
+                "case4" :  ["abcd",             "abcd",             (0, 0, 4)],
+                "case5" :  ["abcd",             "wxyz",             (-1, -1, 0)],
+                "case6" :  ["",                 "",                 (-1, -1, 0)],
+                "case7" :  ["abcdefg",          "bcdefgh",          (1, 0, 6)],
+                "case8" :  ["apple",            "olymppus",         (1, 4, 2)],
+                "case9" :  ["abracadabra",      "cadabraabra",      (4, 0, 7)],
+                "case10":  ["a",                "bcdaet",           (0, 3, 1)],
+                "case11":  ["",                 "bcdaet",           (-1, -1, 0)]}
     subprocess.run(["clear"])                                                   # Clear terminal before checking.
 
     # Algorithm checking...
