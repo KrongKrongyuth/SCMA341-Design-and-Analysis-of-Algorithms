@@ -30,13 +30,16 @@ if __name__ == "__main__":
                 "case8" :  ["apple",            "olymppus",         (1, 4, 2)],
                 "case9" :  ["abracadabra",      "cadabraabra",      (4, 0, 7)],
                 "case10":  ["a",                "bcdaet",           (0, 3, 1)],
-                "case11":  ["",                 "bcdaet",           (-1, -1, 0)]}
+                "case11":  ["",                 "bcdaet",           (-1, -1, 0)],
+                "case12":  ["abbbb",            "babab",            (0, 1, 2)],
+                "case13":  ["abcde",            "ace",              (0, 0, 1)],
+                "case14":  ["aaabaaa",          "aaaabaa",          (0, 1, 6)]}
     subprocess.run(["clear"])                                       # Clear terminal before checking.
 
     # Algorithm checking...
     for case in test_case.keys():
 
-        method = Competition(text_1=test_case[case][0],text_2=test_case[case][1])
+        method = Competition(text_1=test_case["case14"][0],text_2=test_case["case14"][1])
 
         print(f"\n{case} is running...")
         start_time = process_time()                                 # Store the start of running time.

@@ -75,28 +75,40 @@ class Competition():
         """
         Algorithm from ton
         """
-        condition = len(self.text_1) == 0 or len(self.text_2) == 0 or len(set(self.text_1).intersection(set(self.text_2))) == 0
+        null_condition = len(self.text_1) == 0 or len(self.text_2) == 0 or len(set(self.text_1).intersection(set(self.text_2))) == 0
+        equal_condtion = self.text_1 == self.text_2
         # condition เอาไว้เช็คว่าตัว text ที่เข้ามามีขนาดเป็น 0 หรือ ไม่มีตัวซ้ำกันมั้ย ถ้าใช่จะ return ออกไปเลย
-        if condition:
+        # print(equal_condtion)
+        if null_condition:
             print(f"\nDon't match any substring.")
             return (-1, -1, 0)
+        if equal_condtion:
+            print(f"\nFirst index: {0}\nSecond index: {0}\nLength: {len(self.text_1)} letters.")
+            return (0, 0, len(self.text_1))
 
         result, i, max_k = [], 0, 0                                                     # สร้างตัวแปรมาเก็บค่าของ result, i และ max_k (เก็บค่าความยาวคำสูงสุด)
         while i < len(self.text_1):
             j, k = 0, 0                                                                 # สร้างตัวแปร ่่k มาเพื่อใช้ในการนับคำและขยับ
+            print(f"\ni = {i}")
             while j < len(self.text_2):
                 if i + k < len(self.text_1) and self.text_1[i+k] == self.text_2[j]:     # เช็คว่าเจอคำเหมือนหรือเปล่าถ้าเจอจะทำการเพ่ิ่มค่า k ขึ้น 1 หน่วย
+                    print(f"if: {self.text_1[i+k], self.text_2[j]}, i+k = {i+k}, j = {j}, k = {k}")
                     k += 1
-                elif k != 0 and k > max_k:                                              # ถ้าผ่าน if แรกมาได้จะทำการเช็ตว่าค่า k > max_k หรือไม่
+                elif k > max_k:                                                        # ถ้าผ่าน if แรกมาได้จะทำการเช็ตว่าค่า k > max_k หรือไม่
                     max_k = k                                                           # ทำการอัปเดตค่า max_k
                     result = (i, j-k, max_k)                                            # ทำการอัปเดตค่า result ปัจจุบัน
+                    print(f"elif: {self.text_1[i+k], self.text_2[j]}, i+k = {i+k}, j = {j}, k = {k}, {j-k}")
                     k = 0                                                               # เช็ตค่า k = 0 เพื่อเริ่มเช็คคำใหม่
+                elif j-k > 0: print(f"last loop {k}");k = 0
+                print(f"other: {self.text_1[i], self.text_2[j]}, i = {i}, j = {j}, k = {k}, {j-k}\n")
                 j += 1
-            if k != 0 and k > max_k:                                                    # กรณีผ่าน if แรกมาได้จะทำการเช็คซ้ำเป็นครั้งที่ 2 (ใช่กรณีคำซ้ำกัน)
+            if k > max_k:                                                               # กรณีผ่าน if แรกมาได้จะทำการเช็คซ้ำเป็นครั้งที่ 2 (ใช่กรณีคำซ้ำกัน)
                 max_k = k
                 result = (i, j-k, max_k)
+                print(f"outside if: i = {i}, j = {j}, k = {k}")
                 k = 0
             i += 1
+            print("************************************************************")
 
         print(f"\nFirst index: {result[0]}\nSecond index: {result[1]}\nLength: {result[2]} letters.")
         return result
