@@ -39,7 +39,7 @@ if __name__ == "__main__":
     # Algorithm checking...
     for case in test_case.keys():
 
-        method = Competition(text_1=test_case["case14"][0],text_2=test_case["case14"][1])
+        method = Competition(text_1=test_case[case][0],text_2=test_case[case][1])
 
         print(f"\n{case} is running...")
         start_time = process_time()                                 # Store the start of running time.
