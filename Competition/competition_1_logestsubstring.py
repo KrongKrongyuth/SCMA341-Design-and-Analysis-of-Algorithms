@@ -78,59 +78,77 @@ class Competition():
         """
         Algorithm from ton
         """
-        # null_condition = len(self.text_1) == 0 or len(self.text_2) == 0 or len(set(self.text_1).intersection(set(self.text_2))) == 0
-        # equal_condtion = self.text_1 == self.text_2
-        # # condition เอาไว้เช็คว่าตัว text ที่เข้ามามีขนาดเป็น 0 หรือ ไม่มีตัวซ้ำกันมั้ย ถ้าใช่จะ return ออกไปเลย
-        # if null_condition:
-        #     print(f"\nDon't match any substring.")
-        #     return (-1, -1, 0)
-        # if equal_condtion:
-        #     print(f"\nFirst index: {0}\nSecond index: {0}\nLength: {len(self.text_1)} letters.")
-        #     return (0, 0, len(self.text_1))
+        null_condition = len(self.text_1) == 0 or len(self.text_2) == 0 or len(set(self.text_1).intersection(set(self.text_2))) == 0
+        equal_condtion = self.text_1 == self.text_2
+        # condition เอาไว้เช็คว่าตัว text ที่เข้ามามีขนาดเป็น 0 หรือ ไม่มีตัวซ้ำกันมั้ย ถ้าใช่จะ return ออกไปเลย
+        if null_condition:
+            print(f"\nDon't match any substring.")
+            return (-1, -1, 0)
+        if equal_condtion:
+            print(f"\nFirst index: {0}\nSecond index: {0}\nLength: {len(self.text_1)} letters.")
+            return (0, 0, len(self.text_1))
 
-        # result, i, max_k = [], 0, 0                                                     # สร้างตัวแปรมาเก็บค่าของ result, i และ max_k (เก็บค่าความยาวคำสูงสุด)
-        # while i < len(self.text_1):
-        #     j, k = 0, 0                                                                 # สร้างตัวแปร ่่k มาเพื่อใช้ในการนับคำและขยับ
-        #     while j < len(self.text_2):
-        #         if i + k < len(self.text_1) and self.text_1[i+k] == self.text_2[j]:     # เช็คว่าเจอคำเหมือนหรือเปล่าถ้าเจอจะทำการเพ่ิ่มค่า k ขึ้น 1 หน่วย
-        #             k += 1
-        #         elif k > max_k:                                                         # ถ้าผ่าน if แรกมาได้จะทำการเช็ตว่าค่า k > max_k หรือไม่
-        #             max_k = k                                                           # ทำการอัปเดตค่า max_k
-        #             result = (i, j-k, max_k)                                            # ทำการอัปเดตค่า result ปัจจุบัน
-        #             k = 0; j = i                                                        # เช็ตค่า k = 0 เพื่อเริ่มเช็คคำใหม่
-        #             # j = i + 1                                                           # สำหรับ case15
-        #         elif j-k > 0: k = 0
-        #         j += 1
-        #     if k > max_k:                                                               # กรณีผ่าน if แรกมาได้จะทำการเช็คซ้ำเป็นครั้งที่ 2 (ใช่กรณีคำซ้ำกัน)
-        #         max_k = k
-        #         result = (i, j-k, max_k)
-        #         k = 0
-        #     i += 1
+        result, i, max_k = [], 0, 0                                                     # สร้างตัวแปรมาเก็บค่าของ result, i และ max_k (เก็บค่าความยาวคำสูงสุด)
+        while i < len(self.text_1):
+            j, k = 0, 0                                                                 # สร้างตัวแปร ่่k มาเพื่อใช้ในการนับคำและขยับ
+            while j < len(self.text_2):
+                if i + k < len(self.text_1) and self.text_1[i+k] == self.text_2[j]:     # เช็คว่าเจอคำเหมือนหรือเปล่าถ้าเจอจะทำการเพ่ิ่มค่า k ขึ้น 1 หน่วย
+                    k += 1
+                elif k > max_k:                                                         # ถ้าผ่าน if แรกมาได้จะทำการเช็ตว่าค่า k > max_k หรือไม่
+                    max_k = k                                                           # ทำการอัปเดตค่า max_k
+                    result = (i, j-k, max_k)                                            # ทำการอัปเดตค่า result ปัจจุบัน
+                    k = 0; j = i                                                        # เช็ตค่า k = 0 เพื่อเริ่มเช็คคำใหม่
+                    # j = i + 1                                                           # สำหรับ case15
+                elif j-k > 0: k = 0
+                j += 1
+            if k > max_k:                                                               # กรณีผ่าน if แรกมาได้จะทำการเช็คซ้ำเป็นครั้งที่ 2 (ใช่กรณีคำซ้ำกัน)
+                max_k = k
+                result = (i, j-k, max_k)
+                k = 0
+            i += 1
 
-        # print(f"\nFirst index: {result[0]}\nSecond index: {result[1]}\nLength: {result[2]} letters.")
-        # return result
+        print(f"\nFirst index: {result[0]}\nSecond index: {result[1]}\nLength: {result[2]} letters.")
+        return result
 
 
-    def ton_2_algorithm(self, text_1 = None, text_2 = None):
-            if text_1 is None and text_2 is None: text_1, text_2 = self.text_1, self.text_2
-            text_1_size, text_2_size = len(text_1), len(text_2)
+    def ton_main_algorithm(self, text_1 = None, text_2 = None):
+        """_summary_
 
-            base_matrix = [[0] * text_2_size] * text_1_size
+        Args:
+            text_1 (_type_, optional): _description_. Defaults to None.
+            text_2 (_type_, optional): _description_. Defaults to None.
 
-            for i in range(len(text_1)):
-                print("\n")
-                print("[", end = " ")
-                for j in range(len(text_2)):
-                    if text_1[i] == text_2[j]: base_matrix[i][j] += 1
-                    print(base_matrix[i][j], end = " ")
-                print("]", end = " ")
+        Returns:
+            _type_: _description_
+        """
+        if text_1 is None and text_2 is None: text_1, text_2 = self.text_1, self.text_2
 
-            return base_matrix
+        text_1_size, text_2_size, result = len(text_1), len(text_2), (-1, -1, 0)
+        base_matrix = [[0] * text_1_size for _ in range(text_2_size)]
+        
+        null_condition = text_1_size == 0 or text_2_size == 0 or len(set(text_1).intersection(set(text_2))) == 0
+        equal_condtion = text_1 == text_2
+        if null_condition:
+            return result
+        if equal_condtion:
+            result = (0, 0, text_1_size)
+            return result
+        
 
-if __name__ == "__main__":
-    import numpy as np
+        for row in range(len((base_matrix))):
+            # print("\n")
+            # print("[", end = " ")
+            for col in range(len((base_matrix[row]))):
 
-    method = Competition(text_1 = "parachute", text_2 = "shuttle")
-    base_matrix = method.ton_2_algorithm()
-    # print(len(method.text_1), len(method.text_2), np.array(base_matrix).shape)
-    # print(base_matrix[0][0])
+                if text_1[col] == text_2[row] and (row == 0 or col == 0):
+                    base_matrix[row][col] += 1
+                elif text_1[col] == text_2[row]:
+                    if base_matrix[row-1][col-1] > 0:
+                        base_matrix[row][col] = base_matrix[row-1][col-1] + 1
+                    else: base_matrix[row][col] += 1
+
+                if base_matrix[row][col] > result[2]:
+                    result = (col - base_matrix[row][col] + 1, row - base_matrix[row][col] + 1, base_matrix[row][col])
+                # print(base_matrix[row][col], end = " ")
+            # print("]\n",)
+        return result

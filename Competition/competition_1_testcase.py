@@ -44,7 +44,7 @@ if __name__ == "__main__":
 
         print(f"\n{case} is running...")
         start_time = process_time()                                 # Store the start of running time.
-        result = method.tao_algorithm()                             # Change the method here.
+        result = method.ton_main_algorithm()                        # Change the method here.
         end_time = process_time()                                   # Store the end of running time.
         print(f"{case} status: {result == test_case[case][2]}")
         messure_time(start_time, end_time)
