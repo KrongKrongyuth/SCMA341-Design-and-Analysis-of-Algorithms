@@ -2,7 +2,7 @@
 This file use for test the algorithm correctness.
 """
 
-import subprocess
+# import subprocess
 from competition_1_logestsubstring import Competition
 from time import process_time
 
@@ -35,7 +35,7 @@ if __name__ == "__main__":
                 "case13":  ["abcde",            "ace",              (0, 0, 1)  ],
                 "case14":  ["aaabaaa",          "aaaabaa",          (0, 1, 6)  ],
                 "case15":  ["abbbabbabb",       "baaabaaabb",       (0, 7, 3)  ]}
-    subprocess.run(["clear"])                                       # Clear terminal before checking.
+    # subprocess.run(["Cls"])                                       # Clear terminal before checking.
 
     # Algorithm checking...
     for case in test_case.keys():
@@ -44,7 +44,7 @@ if __name__ == "__main__":
 
         print(f"\n{case} is running...")
         start_time = process_time()                                 # Store the start of running time.
-        result = method.tao_algorithm()                             # Change the method here.
+        result = method.tonkaow_algorithm()                         # Change the method here.
         end_time = process_time()                                   # Store the end of running time.
         print(f"{case} status: {result == test_case[case][2]}")
         messure_time(start_time, end_time)
