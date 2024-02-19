@@ -159,7 +159,7 @@ class Competition():
             return result
         if equal_condtion:
             # print(f"\nFirst index: {0}\nSecond index: {0}\nLength: {len(text_1)} letters.")
-            result = (0, 0, len(text_1))
+            result = (0, 0, text_1_size)
             return result
         
 
