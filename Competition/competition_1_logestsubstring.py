@@ -109,12 +109,28 @@ class Competition():
 
         # print(f"\nFirst index: {result[0]}\nSecond index: {result[1]}\nLength: {result[2]} letters.")
         # return result
-        text_1, text_2 = self.text_1, self.text_2
-        text_1_size, text_2_size = len(text_1), len(text_2)
 
-        base_matrix = [[[0] * text_1_size] * text_2_size, [[0] * text_1_size] * text_2_size]
-        print(base_matrix)
 
-        # for i in range(len(text_1)):
-        #     for j in range(len(text_2)):
-        #         print(base_matrix[i][j])
+    def ton_2_algorithm(self, text_1 = None, text_2 = None):
+            if text_1 is None and text_2 is None: text_1, text_2 = self.text_1, self.text_2
+            text_1_size, text_2_size = len(text_1), len(text_2)
+
+            base_matrix = [[0] * text_2_size] * text_1_size
+
+            for i in range(len(text_1)):
+                print("\n")
+                print("[", end = " ")
+                for j in range(len(text_2)):
+                    if text_1[i] == text_2[j]: base_matrix[i][j] += 1
+                    print(base_matrix[i][j], end = " ")
+                print("]", end = " ")
+
+            return base_matrix
+
+if __name__ == "__main__":
+    import numpy as np
+
+    method = Competition(text_1 = "parachute", text_2 = "shuttle")
+    base_matrix = method.ton_2_algorithm()
+    # print(len(method.text_1), len(method.text_2), np.array(base_matrix).shape)
+    # print(base_matrix[0][0])
