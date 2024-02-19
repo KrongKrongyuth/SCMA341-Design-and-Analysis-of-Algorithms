@@ -106,8 +106,6 @@ class Competition():
         print(start_text1_index,start_text2_index,max_length)
         return(start_text1_index,start_text2_index,max_length)
 
-        
-
     def ton_algorithm(self) -> tuple:
         """
         Algorithm from ton
