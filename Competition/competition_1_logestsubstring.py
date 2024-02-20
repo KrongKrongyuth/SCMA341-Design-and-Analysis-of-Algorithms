@@ -142,7 +142,6 @@ class Competition():
         print(f"\nFirst index: {result[0]}\nSecond index: {result[1]}\nLength: {result[2]} letters.")
         return result
 
-
     def ton_main_algorithm(self, text_1 = None, text_2 = None):
         """_summary_
         This algorithm use concept of dynamic programming to find longest common substring.
