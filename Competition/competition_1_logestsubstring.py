@@ -142,15 +142,18 @@ class Competition():
         print(f"\nFirst index: {result[0]}\nSecond index: {result[1]}\nLength: {result[2]} letters.")
         return result
 
+
     def ton_main_algorithm(self, text_1 = None, text_2 = None):
         """_summary_
+        This algorithm use concept of dynamic programming to find longest common substring.
+        By create matrix that contain the number when found common substring
 
         Args:
-            text_1 (_type_, optional): _description_. Defaults to None.
-            text_2 (_type_, optional): _description_. Defaults to None.
+            text_1 (str): This variable contain first text. Defaults to None.
+            text_2 (str): This variable contain secound text. Defaults to None.
 
         Returns:
-            _type_: _description_
+            result (tuple): result = (text_1 starting index, text_2_starting_index, substring length)
         """
         if text_1 is None and text_2 is None: text_1, text_2 = self.text_1, self.text_2
 
