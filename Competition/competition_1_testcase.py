@@ -4,6 +4,7 @@ This file use for test the algorithm correctness.
 
 import subprocess
 from competition_1_logestsubstring import Competition
+from compettion_1_submission import main_algorithm
 from time import process_time
 
 def messure_time(start, end):
@@ -40,11 +41,12 @@ if __name__ == "__main__":
     # Algorithm checking...
     for case in test_case.keys():
 
-        method = Competition(text_1=test_case[case][0],text_2=test_case[case][1])
+        # method = Competition(text_1=test_case[case][0],text_2=test_case[case][1])
 
         print(f"\n{case} is running...")
         start_time = process_time()                                 # Store the start of running time.
-        result = method.ton_main_algorithm()                        # Change the method here.
+        result = main_algorithm(text_1=test_case[case][0],text_2=test_case[case][1])
+        # result = method.ton_main_algorithm()                        # Change the method here.
         end_time = process_time()                                   # Store the end of running time.
         print(f"{case} status: {result == test_case[case][2]}")
         messure_time(start_time, end_time)
