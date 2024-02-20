@@ -13,17 +13,19 @@ class Competition():
         """
         # ใช้ เซต ในการช่วยหาตัวอักษรที่ซ้ำกันก่อน
         common_chars = set(self.text_1) & set(self.text_2)
-        print(f"common characters in both texts are :{common_chars}")
-        
+        #print(f"common characters in both texts are :{common_chars}")
         #เราเช็คได้ทันทีว่า ถ้ามันไม่มีตัวอักษรที่เหมือนเลยจะได้เซตว่างแล้วหยุดการทำงานได้เลยไม่ต้อง run ต่อ
-        if common_chars == set() :
+        if common_chars == set() or (self.text_1 == "" and self.text_2 == "") :
             print("There is no common substring found between the two texts")
-            return ["",0]
+            return (-1,-1,0)
         else:
+            common_chars = sorted(common_chars)
             #max_length จะเก็บค่าความยาวที่มากที่สุดของ subtext ที่เหมือนกัน
             max_length = 0
             #start_index จะเอาไว้เช็คว่าตัวที่เริ่มเหมือนกัน(ดูจาก text1 เป็นหลัก) ว่าอยู่ index ไหน
             start_index = 0
+            start_index2 = 0
+
             #longest_common อันนี้เอาไว้ดูว่า subtext ที่ซ้ำกันคืออะไรเผื่อเฉยๆ อจ.ไม่ได้สั่ง
             longest_common = ""
             for char in common_chars:
@@ -52,14 +54,15 @@ class Competition():
                         if length > max_length:
                             max_length = length
                             start_index = i1
+                            start_index2 = i2
                             #จะ print คำ ก็ให้เริ่มจาก start index ที่ update แล้ว ไปถึง start index ที่ + ความยาวเข้าไป
                             longest_common = self.text_1[start_index:start_index + max_length]
         
-        print(f"Starting index : {start_index}")
-        print(f"Length of longest common substring : {max_length}")
-        print(f"Longest common substring : {longest_common}")
+            print(f"Starting index : {start_index}")
+            print(f"Length of longest common substring : {max_length}")
+            print(f"Longest common substring : {longest_common}")
         
-        return [longest_common, max_length]
+            return (start_index,start_index2, max_length)
 
     def kantong_algorithm(self):
         """
@@ -103,8 +106,6 @@ class Competition():
         print(start_text1_index,start_text2_index,max_length)
         return(start_text1_index,start_text2_index,max_length)
 
-        
-
     def ton_algorithm(self) -> tuple:
         """
         Algorithm from ton
@@ -139,4 +140,41 @@ class Competition():
             i += 1
 
         print(f"\nFirst index: {result[0]}\nSecond index: {result[1]}\nLength: {result[2]} letters.")
+        return result
+
+
+    def ton_main_algorithm(self, text_1 = None, text_2 = None):
+
+        if text_1 is None and text_2 is None: text_1, text_2 = self.text_1, self.text_2
+
+        text_1_size, text_2_size, result = len(text_1), len(text_2), (-1, -1, 0)
+        base_matrix = [[0] * text_1_size for _ in range(text_2_size)]
+        
+        null_condition = text_1_size == 0 or text_2_size == 0 or len(set(text_1).intersection(set(text_2))) == 0
+        equal_condtion = text_1 == text_2
+        if null_condition:
+            # print(f"\nDon't match any substring.")
+            return result
+        if equal_condtion:
+            # print(f"\nFirst index: {0}\nSecond index: {0}\nLength: {len(text_1)} letters.")
+            result = (0, 0, text_1_size)
+            return result
+        
+
+        for row in range(len((base_matrix))):
+            # print("\n")
+            # print("[", end = " ")
+            for col in range(len((base_matrix[row]))):
+
+                if text_1[col] == text_2[row] and (row == 0 or col == 0):
+                    base_matrix[row][col] += 1
+                elif text_1[col] == text_2[row]:
+                    if base_matrix[row-1][col-1] > 0:
+                        base_matrix[row][col] = base_matrix[row-1][col-1] + 1
+                    else: base_matrix[row][col] += 1
+                if base_matrix[row][col] > result[2]:
+                    result = (col - base_matrix[row][col] + 1, row - base_matrix[row][col] + 1, base_matrix[row][col])
+                # print(base_matrix[row][col], end = " ")
+
+            # print("]\n",)
         return result
