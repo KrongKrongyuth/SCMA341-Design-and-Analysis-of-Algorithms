@@ -160,10 +160,10 @@ class Competition():
         empty_condition = text_1_size == 0 or text_2_size == 0
         equal_condition = text_1 == text_2
 
+        if empty_condition: return result
         if equal_condition:
             result = (0, 0, text_1_size)
             return result
-        if empty_condition: return result
         
         intersect_condition = len(set(text_1).intersection(set(text_2))) == 0
 
