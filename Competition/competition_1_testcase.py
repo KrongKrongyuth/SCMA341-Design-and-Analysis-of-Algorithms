@@ -32,7 +32,7 @@ if __name__ == "__main__":
                 "case10":  ["a",                "bcdaet",           (0, 3, 1)  ],
                 "case11":  ["",                 "bcdaet",           (-1, -1, 0)],
                 "case12":  ["abbbb",            "babab",            (0, 1, 2)  ],
-                "case13":  ["abcde",            "ace",              (0, 0, 1)  ],
+                "case13":  ["eagle",            "ace",              (0, 0, 1)  ],
                 "case14":  ["aaabaaa",          "aaaabaa",          (0, 1, 6)  ],
                 "case15":  ["abbbabbabb",       "baaabaaabb",       (0, 7, 3)  ]}
     subprocess.run(["clear"])                                       # Clear terminal before checking.
