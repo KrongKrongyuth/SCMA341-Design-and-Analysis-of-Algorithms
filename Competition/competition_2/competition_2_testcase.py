@@ -37,11 +37,7 @@ TEST_CASE = {"case_1": [[[1, 2, 2, 2, 1],
                         [None,  None, None,   1,    1 ]]]}
 
 if __name__ == "__main__":
-    print(find_connected(TEST_CASE["case_1"][0]))
+    print(ConnectedComponent(TEST_CASE["case_1"][0]).find_connected(TEST_CASE["case_1"][0]))
     # print(list(map(lambda x,y: x + y, [1,2], [3, 4])))
     # TEST_CASE["case_1"][0][0][1] = 5
     # print(TEST_CASE["case_1"][0][0][1])
-    if []:
-        print(True)
-    elif not []:
-        print(False)

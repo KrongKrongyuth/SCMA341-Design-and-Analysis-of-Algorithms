@@ -20,44 +20,57 @@ Instructions
 Module owner: Ton
 """
 
-def find_connected(graph:list, current_index:list = [0,0], footprint:list = [], handle:str = ""):
-    GRAPH_ROW, GRAPH_COL = len(graph), len(graph[0])
-    RESULT = [[None for _ in range(GRAPH_COL)] for _ in range(GRAPH_ROW)]
-
-    moving_direction = [(-1,  0),   # Up
+class ConnectedComponent():
+    def __init__(self, graph:list) -> None:
+        self.graph = graph
+        self.GRAPH_ROW, self.GRAPH_COL = len(graph), len(graph[0])
+        self.RESULT = [[None for _ in range(self.GRAPH_COL)] for _ in range(self.GRAPH_ROW)]
+        self.direction = [  
+                        (-1,  0),   # Up
                         ( 1,  0),   # Down
                         ( 0, -1),   # Left
-                        ( 0,  1)]   # Right
-    bound_condition = (0 <= current_index[0] < GRAPH_ROW) and (0 <= current_index[1] < GRAPH_COL)
+                        ( 0,  1)    # Right
+                        ]   
 
-    # Recursion Algorithm
-    # print(graph[current_index[0]][current_index[1]])
-    if bound_condition:
-        ########## BASED CASE ##########
-        component = graph[current_index[0]][current_index[1]]
-        
-        if component == handle:
-            pass
-        # print(component, previous, current_index[0], current_index[1])
-        ########## BASED CASE ##########
+    def find_connected(self, graph:list, current_index:list = [0,0], footprint:list = [], handle:str = ""):
 
-        # print(list(map(lambda x, y: x + y, current_index, moving_direction[0])),
-            #   list(map(lambda x, y: x + y, current_index, moving_direction[1])),
-            #   list(map(lambda x, y: x + y, current_index, moving_direction[2])),
-            #   list(map(lambda x, y: x + y, current_index, moving_direction[3])),
-            #   current_index,
-            #   moving_direction[0],
-            #   sep = "\t")
+        bound_condition = (0 <= current_index[0] < self.GRAPH_ROW) and (0 <= current_index[1] < self.GRAPH_COL) and (current_index not in footprint)
+        # print(bound_condition)
 
-        ########## MOVE SET (4 Direction) ##########
-        # up = find_connected(graph, list(map(lambda x, y: x + y, current_index, moving_direction[0])))
-        # down = find_connected(graph, list(map(lambda x, y: x + y, current_index, moving_direction[1])))
-        # left = find_connected(graph, list(map(lambda x, y: x + y, current_index, moving_direction[2])))
-        # right = find_connected(graph, list(map(lambda x, y: x + y, current_index, moving_direction[3])))
-        ########## MOVE SET (4 Direction) ##########
+        if bound_condition:
+            ########## Recursion Algorithm ##########
 
-    # Iterative Algorithm
-    # while bound_condition:
-    #     # Algorithm
-    #     break
-    # return RESULT
+            ########## BASED CASE ##########
+            component = graph[current_index[0]][current_index[1]]
+            print(component, current_index)
+            print(footprint, len(footprint))
+            if handle == "":
+                handle = component
+            
+            if component == handle:
+                self.RESULT[current_index[0]][current_index[1]] = handle
+                footprint.append(current_index)
+                # return True
+            elif component != handle:
+                """
+                PUT SOME CODE HERE
+                """
+                footprint.append(current_index)
+                return False
+            ########## BASED CASE ##########
+
+            ########## MOVE SET (4 Direction) ##########
+            up = self.find_connected(graph, list(map(lambda x, y: x + y, current_index, self.direction[0])))
+            down = self.find_connected(graph, list(map(lambda x, y: x + y, current_index, self.direction[1])))
+            left = self.find_connected(graph, list(map(lambda x, y: x + y, current_index, self.direction[2])))
+            right = self.find_connected(graph, list(map(lambda x, y: x + y, current_index, self.direction[3])))
+            ########## MOVE SET (4 Direction) ##########
+
+        # Iterative Algorithm
+        # while bound_condition:
+        #     # Algorithm
+        #     break
+        # return RESULT
+        else:
+            return False
+        return self.RESULT
