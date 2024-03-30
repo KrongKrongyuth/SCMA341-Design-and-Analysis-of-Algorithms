@@ -25,52 +25,65 @@ class ConnectedComponent():
         self.graph = graph
         self.GRAPH_ROW, self.GRAPH_COL = len(graph), len(graph[0])
         self.RESULT = [[None for _ in range(self.GRAPH_COL)] for _ in range(self.GRAPH_ROW)]
-        self.direction = [  
+        self.direction = [
                         (-1,  0),   # Up
                         ( 1,  0),   # Down
                         ( 0, -1),   # Left
                         ( 0,  1)    # Right
-                        ]   
+                        ]
+        self.footprint = []
+        self.family = [self.graph[0][0]]
 
-    def find_connected(self, graph:list, current_index:list = [0,0], footprint:list = [], handle:str = ""):
+    def find_connected(self, current_index:list = [0,0]):
+        ########## Recursion Algorithm ##########
+        component = self.graph[current_index[0]][current_index[1]]
+        print(component)
 
-        bound_condition = (0 <= current_index[0] < self.GRAPH_ROW) and (0 <= current_index[1] < self.GRAPH_COL) and (current_index not in footprint)
-        # print(bound_condition)
-
-        if bound_condition:
-            ########## Recursion Algorithm ##########
-
-            ########## BASED CASE ##########
-            component = graph[current_index[0]][current_index[1]]
-            print(component, current_index)
-            print(footprint, len(footprint))
-            if handle == "":
-                handle = component
-            
-            if component == handle:
-                self.RESULT[current_index[0]][current_index[1]] = handle
-                footprint.append(current_index)
-                # return True
-            elif component != handle:
-                """
-                PUT SOME CODE HERE
-                """
-                footprint.append(current_index)
-                return False
-            ########## BASED CASE ##########
-
-            ########## MOVE SET (4 Direction) ##########
-            up = self.find_connected(graph, list(map(lambda x, y: x + y, current_index, self.direction[0])))
-            down = self.find_connected(graph, list(map(lambda x, y: x + y, current_index, self.direction[1])))
-            left = self.find_connected(graph, list(map(lambda x, y: x + y, current_index, self.direction[2])))
-            right = self.find_connected(graph, list(map(lambda x, y: x + y, current_index, self.direction[3])))
-            ########## MOVE SET (4 Direction) ##########
+        ########## BASED CASE ##########
+        """
+        PUT SOME CODE HERE
+        STOP WHEN ALL PATH RETURN FALSE
+        """
+        ########## BASED CASE ##########
+        
+        ########## MOVE ##########
+        if component == self.family[0]:
+            self.footprint.append(current_index)
+            self.RESULT[current_index[0]][current_index[1]] = component
+            possible_move = []
+            for direction in self.direction:
+                filter_index =  list (
+                                filter  (
+                                    lambda x: 0 <= x[0] < self.GRAPH_ROW and 0 <= x[1] < self.GRAPH_COL and x not in self.footprint,
+                                    [list(map(lambda x, y: x + y, current_index, direction))]
+                                        )
+                                    )
+                if filter_index:
+                    next_index = filter_index[0]
+                    print(next_index)
+                    possible_move.append(next_index)
+                    next_componet = self.graph[next_index[0]][next_index[1]]
+                    if next_componet == self.family[0]:
+                        return self.find_connected(current_index = next_index)    # Fix this line
+            return self.RESULT
+        elif component != self.family[0]:
+            self.footprint.append(current_index)
+            if component not in self.family:
+                self.family.append(component)
+            return False
+        ########## MOVE ##########
+        ########## Recursion Algorithm ##########
+        
+        # ########## MOVE SET (4 Direction) ##########
+        # up = self.find_connected(self.graph, list(map(lambda x, y: x + y, current_index, self.direction[0])), True)
+        # down = self.find_connected(self.graph, list(map(lambda x, y: x + y, current_index, self.direction[1])), True)
+        # left = self.find_connected(self.graph, list(map(lambda x, y: x + y, current_index, self.direction[2])), True)
+        # right = self.find_connected(self.graph, list(map(lambda x, y: x + y, current_index, self.direction[3])), True)
+        # ########## MOVE SET (4 Direction) ##########
 
         # Iterative Algorithm
         # while bound_condition:
         #     # Algorithm
         #     break
         # return RESULT
-        else:
-            return False
-        return self.RESULT
+        # return self.RESULT
