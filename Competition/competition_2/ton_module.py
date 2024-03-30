@@ -32,58 +32,49 @@ class ConnectedComponent():
                         ( 0,  1)    # Right
                         ]
         self.footprint = []
-        self.family = [self.graph[0][0]]
+        self.family = {}
 
-    def find_connected(self, current_index:list = [0,0]):
-        ########## Recursion Algorithm ##########
+    def find_connected(self, current_index:list = [0,0], FirstRound:bool = True):
+        ########## Recursive Algorithm ##########
         component = self.graph[current_index[0]][current_index[1]]
-        print(component)
-
-        ########## BASED CASE ##########
-        """
-        PUT SOME CODE HERE
-        STOP WHEN ALL PATH RETURN FALSE
-        """
-        ########## BASED CASE ##########
+        if FirstRound:
+            self.family[component] = current_index
         
         ########## MOVE ##########
-        if component == self.family[0]:
-            self.footprint.append(current_index)
-            self.RESULT[current_index[0]][current_index[1]] = component
-            possible_move = []
-            for direction in self.direction:
-                filter_index =  list (
-                                filter  (
-                                    lambda x: 0 <= x[0] < self.GRAPH_ROW and 0 <= x[1] < self.GRAPH_COL and x not in self.footprint,
-                                    [list(map(lambda x, y: x + y, current_index, direction))]
-                                        )
+        self.footprint.append(current_index)
+        self.RESULT[current_index[0]][current_index[1]] = component
+        possible_move = []
+        for direction in self.direction:
+            filter_index =  list (
+                            filter  (
+                                lambda x: 0 <= x[0] < self.GRAPH_ROW and 0 <= x[1] < self.GRAPH_COL and x not in self.footprint,
+                                [list(map(lambda x, y: x + y, current_index, direction))]
                                     )
-                if filter_index:
-                    next_index = filter_index[0]
-                    print(next_index)
+                                )
+            if filter_index:
+                next_index = filter_index[0]
+                next_component = self.graph[next_index[0]][next_index[1]]
+                if next_component == list(self.family.keys())[0]:
                     possible_move.append(next_index)
-                    next_componet = self.graph[next_index[0]][next_index[1]]
-                    if next_componet == self.family[0]:
-                        return self.find_connected(current_index = next_index)    # Fix this line
-            return self.RESULT
-        elif component != self.family[0]:
-            self.footprint.append(current_index)
-            if component not in self.family:
-                self.family.append(component)
-            return False
+                    self.find_connected(current_index = next_index, FirstRound = False)
+                elif (next_component != list(self.family.keys())[0]) and (next_component not in self.family.keys()):
+                    self.family[next_component] = current_index # We need to add same element
         ########## MOVE ##########
-        ########## Recursion Algorithm ##########
         
-        # ########## MOVE SET (4 Direction) ##########
-        # up = self.find_connected(self.graph, list(map(lambda x, y: x + y, current_index, self.direction[0])), True)
-        # down = self.find_connected(self.graph, list(map(lambda x, y: x + y, current_index, self.direction[1])), True)
-        # left = self.find_connected(self.graph, list(map(lambda x, y: x + y, current_index, self.direction[2])), True)
-        # right = self.find_connected(self.graph, list(map(lambda x, y: x + y, current_index, self.direction[3])), True)
-        # ########## MOVE SET (4 Direction) ##########
+        ########## BASED CASE ##########
+        if not possible_move:
+            self.family.pop(list(self.family.keys())[0])
+            print(self.RESULT)
+            self.RESULT = [[None for _ in range(self.GRAPH_COL)] for _ in range(self.GRAPH_ROW)]
+        if not self.family:
+            return self.RESULT
+        ########## BASED CASE ##########
+        ########## Recursive Algorithm ##########
 
-        # Iterative Algorithm
+        ########## Iterative Algorithm ##########
         # while bound_condition:
         #     # Algorithm
         #     break
         # return RESULT
         # return self.RESULT
+        ########## Iterative Algorithm ##########
