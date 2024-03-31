@@ -54,15 +54,15 @@ class ConnectedComponent():
             if filter_index:
                 next_index = filter_index[0]
                 next_component = self.graph[next_index[0]][next_index[1]]
-                if next_component == list(self.family.keys())[0]:
+                if (self.family) and (next_component == list(self.family.keys())[0]):
                     possible_move.append(next_index)
                     self.find_connected(current_index = next_index, FirstRound = False)
-                elif (next_component != list(self.family.keys())[0]) and (next_component not in self.family.keys()):
+                elif (self.family) and (next_component != list(self.family.keys())[0]) and (next_component not in self.family.keys()):
                     self.family[next_component] = current_index # We need to add same element
         ########## MOVE ##########
         
         ########## BASED CASE ##########
-        if not possible_move:
+        if (not possible_move) and (self.family):
             self.family.pop(list(self.family.keys())[0])
             print(self.RESULT)
             self.RESULT = [[None for _ in range(self.GRAPH_COL)] for _ in range(self.GRAPH_ROW)]
