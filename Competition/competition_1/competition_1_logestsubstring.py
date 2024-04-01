@@ -73,6 +73,38 @@ class Competition():
         """
         Algorithm from tonkaow
         """
+        import numpy as np
+
+        # first we need to check if text1 and text2 exist at the first place?
+        if len(self.text_1) == 0 or len(self.text_2) == 0:
+                print("ใส่คำก่อนไหมแม่ งง")
+                return(-1,-1,0)
+        # Then we need to check if text1 and text2 contain same character whatsoever?
+        elif len(set(self.text_1).intersection(set(self.text_2))) == 0:
+                print("ไม่ต้องหาหรอกจ้ามันไม่มี")
+                return(-1,-1,0)
+        # Then we need to check if text1 and text 2 is the same text or not?
+        elif self.text_1 == self.text_2:
+                print(f"The longest substring is {self.text_1} and the length is {len(self.text_1)} starting from index 0")
+                return(0,0,len(self.text_1))
+        # We will use matrix to approch our solution
+        This_matrix = np.zeros(shape=(len(self.text_2),len(self.text_1)),dtype=np.int8)                             #We generate len(text2)*len(text1) 0 matrix. Later on we will change the value in this matrix
+        for ri in range(len(self.text_2)):                                                                          #We start from row then to column
+            for ci in range(len(self.text_1)):  
+                if self.text_2[ri] == self.text_1[ci]:
+                    if ri == 0 or ci == 0:
+                        This_matrix[ri][ci]=1
+                    elif This_matrix[ri-1][ci-1]>0:
+                        This_matrix[ri][ci]=This_matrix[ri-1][ci-1]+1
+                    else:
+                        This_matrix[ri][ci]=1
+        max_length_index = np.unravel_index(np.argmax(This_matrix),This_matrix.shape)
+        max_length = This_matrix[max_length_index[0]][max_length_index[1]]
+        start_text2_index = max_length_index[0]-(max_length-1)
+        start_text1_index = max_length_index[1]-(max_length-1)
+        print(This_matrix)
+        print(start_text1_index,start_text2_index,max_length)
+        return(start_text1_index,start_text2_index,max_length)
 
     def ton_algorithm(self) -> tuple:
         """
@@ -108,4 +140,48 @@ class Competition():
             i += 1
 
         print(f"\nFirst index: {result[0]}\nSecond index: {result[1]}\nLength: {result[2]} letters.")
+        return result
+
+    def ton_main_algorithm(self, text_1 = None, text_2 = None):
+        """_summary_
+        This algorithm use concept of dynamic programming to find longest common substring.
+        By create matrix that contain the number when found common substring
+
+        Args:
+            text_1 (str): This variable contain first text. Defaults to None.
+            text_2 (str): This variable contain secound text. Defaults to None.
+
+        Returns:
+            result (tuple): result = (text_1 starting index, text_2_starting_index, substring length)
+        """
+        if text_1 is None and text_2 is None: text_1, text_2 = self.text_1, self.text_2
+
+        text_1_size, text_2_size, result = len(text_1), len(text_2), (-1, -1, 0)
+        empty_condition = text_1_size == 0 or text_2_size == 0
+        equal_condition = text_1 == text_2
+
+        if empty_condition: return result
+        if equal_condition:
+            result = (0, 0, text_1_size)
+            return result
+        
+        intersect_condition = len(set(text_1).intersection(set(text_2))) == 0
+
+        if intersect_condition: return result
+
+        base_matrix = [[0] * text_1_size for _ in range(text_2_size)]
+
+        for row in range(len((base_matrix))):
+            # print("[", end = " ")
+            for col in range(len((base_matrix[row]))):
+                if text_1[col] == text_2[row] and (row == 0 or col == 0):
+                    base_matrix[row][col] += 1
+                elif text_1[col] == text_2[row]:
+                    base_matrix[row][col] = base_matrix[row-1][col-1] + 1
+
+                if base_matrix[row][col] > result[2]:
+                    k, i, j = base_matrix[row][col], col - base_matrix[row][col] + 1, row - base_matrix[row][col] + 1
+                    result = (i, j, k)
+            #     print(base_matrix[row][col], end = " ")
+            # print("]",)
         return result
