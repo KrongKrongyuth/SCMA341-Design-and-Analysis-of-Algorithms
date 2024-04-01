@@ -39,14 +39,14 @@ TEST_CASE = {"case_1": [[[1, 2, 2, 2, 4],
 if __name__ == "__main__":
     cc = ConnectedComponent(TEST_CASE["case_1"][0])
     # Run time test
-    # start = process_time()
-    # cc.find_connected(current_index = [0,0])
-    # end = process_time()
-    # print(end - start)
+    start = process_time()
+    cc.find_connected()
+    end = process_time()
+    print(end - start)
     
     # Test result
-    # print(cc.find_connected(current_index = [1,1])) # ERROR
-    print(cc.find_connected())  # PASS
+    # print(cc.find_connected(start_index = [1,4])) # PASS (Iterative), ERROR (Recursive)
+    # print(cc.find_connected(start_index = [0,0]))  # PASS (Iterative), PASS (Recursive)
     
     # Other
     # print(list(filter(lambda x: 0 <= x[0] < 5 and 0 <= x[1] < 5, [list(map(lambda x,y: x + y, [3,3], [1, 1]))])))
@@ -55,4 +55,6 @@ if __name__ == "__main__":
     # table = {1: [1,2], 2: [2,3]}
     # print(3 in table.keys())
     # dict_test = {1: [1,2], 2: [2,3]}
-    # print(dict_test.pop(1), dict_test)
+    # print(len(dict_test))
+    # for i in dict_test:
+    #     print(i)

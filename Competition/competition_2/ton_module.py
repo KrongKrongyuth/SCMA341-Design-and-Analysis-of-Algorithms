@@ -20,6 +20,8 @@ Instructions
 Module owner: Ton
 """
 
+from time import sleep
+
 class ConnectedComponent():
     def __init__(self, graph:list) -> None:
         self.graph = graph
@@ -34,7 +36,18 @@ class ConnectedComponent():
         self.footprint = []
         self.family = {}
 
-    def find_connected(self, current_index:list = [0,0], FirstRound:bool = True):
+    def find_connected(self, current_index:list = [0,0], FirstRound:bool = True) -> str:
+        """
+        This function will find the connected component in graph and print out the result.
+        This algorithm is based on recursion structure.
+
+        Args:
+            current_index (list, optional): The place where the algorithm place. Defaults to [0,0].
+            FirstRound (bool, optional): Detemine is the firstround or not?. Defaults to True.
+
+        Returns:
+            str: "Algorithm Finished"
+        """
         ########## Recursive Algorithm ##########
         component = self.graph[current_index[0]][current_index[1]]
         if FirstRound:
@@ -71,10 +84,29 @@ class ConnectedComponent():
         ########## BASED CASE ##########
         ########## Recursive Algorithm ##########
 
-        ########## Iterative Algorithm ##########
-        # while bound_condition:
-        #     # Algorithm
-        #     break
-        # return RESULT
-        # return self.RESULT
-        ########## Iterative Algorithm ##########
+    def find_connected(self, start_index = [0,0]):
+        component = self.graph[start_index[0]][start_index[1]]
+        family = {component: start_index}
+        family_keys = list(family.keys())
+        
+        for handle in family_keys:
+            next_move = [family[handle]]
+            footprint = [family[handle]]
+            self.RESULT[family[handle][0]][family[handle][1]] = handle
+            for move in next_move:
+                current_index = move
+                footprint.append(current_index)
+                for direction in self.direction:
+                    next_index = [current_index[0] + direction[0], current_index[1] + direction[1]]
+                    if 0 <= next_index[0] < self.GRAPH_ROW and 0 <= next_index[1] < self.GRAPH_COL and next_index not in footprint:
+                        next_component = self.graph[next_index[0]][next_index[1]]
+                        if next_component == handle:
+                            next_move.append(next_index)
+                            self.RESULT[next_index[0]][next_index[1]] = next_component
+                        elif (next_component != handle) and (next_component not in family.keys()):
+                            family[next_component] = next_index
+                            family_keys.append(next_component)
+            print(self.RESULT)
+            self.RESULT = [[None for _ in range(self.GRAPH_COL)] for _ in range(self.GRAPH_ROW)]
+
+        return "\nAlgorithm Finished"
