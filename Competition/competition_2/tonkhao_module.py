@@ -19,3 +19,29 @@ Instructions
 
 Module owner: Tonkhao
 """
+def find_connected(Graph):
+    Group_id = {}
+    Ans=[]
+    for i,v in enumerate(Graph):
+        for j,k in enumerate(Graph[i]):
+            if Graph[i][j] in Group_id:
+                Group_id[Graph[i][j]].append([i,j])
+            else:
+                Group_id[Graph[i][j]] = [[i,j]]
+
+    for i in Group_id:
+        Group=[[None]*len(Graph) for i in range(len(Graph[0]))]
+        for j in Group_id[i]:
+            Group[j[0]][j[1]] = i
+        Ans.append(Group)
+    return(Ans)
+        
+
+
+G=[[1,2,2,2,1],
+   [1,3,3,2,1],
+   [1,1,3,2,1],
+   [3,3,3,2,1],
+   [3,3,3,1,1]]
+
+print(find_connected(G))
