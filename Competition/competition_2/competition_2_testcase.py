@@ -45,24 +45,24 @@ if __name__ == "__main__":
     ton_runtime, tonkhao_runtime, tao_runtime, kanthong_runtime, = [], [], [], []
     for _ in range(num_round):
         start = process_time()
-        cc.find_connected(current_index = [0,0])
+        cc.find_connected(start_index = [0,0])
         end = process_time()
         ton_runtime.append(end - start)
         
         start = process_time()
-        cc.find_connected(current_index = [0,0])
+        cc.find_connected(start_index = [0,0])
         end = process_time()
-        ton_runtime.append(end - start)
+        tao_runtime.append(end - start)
         
         start = process_time()
-        cc.find_connected(current_index = [0,0])
+        cc.find_connected(start_index = [0,0])
         end = process_time()
-        ton_runtime.append(end - start)
+        tonkhao_runtime.append(end - start)
         
         start = process_time()
-        cc.find_connected(current_index = [0,0])
+        cc.find_connected(start_index = [0,0])
         end = process_time()
-        ton_runtime.append(end - start)
+        kanthong_runtime.append(end - start)
     
     # Test result
     # print(cc.find_connected(start_index = [1,1])) # PASS
