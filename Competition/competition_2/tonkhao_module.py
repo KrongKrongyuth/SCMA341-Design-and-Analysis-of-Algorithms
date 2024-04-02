@@ -19,9 +19,10 @@ Instructions
 
 Module owner: Tonkhao
 """
+
 def find_connected(Graph):
 
-    max_val = max(map(max, G))
+    max_val = max(map(max, Graph))
     equivalent = {}
     Group_id = {}
     Ans=[]
@@ -77,11 +78,3 @@ def find_connected(Graph):
         Ans.append(Group_Ans)
 
     return(Ans)
-        
-
-
-# G=[[1,2,2,2,1],
-#    [1,3,3,2,1],
-#    [1,1,3,2,1],
-#    [3,3,3,2,1],
-#    [3,3,3,1,1]]
