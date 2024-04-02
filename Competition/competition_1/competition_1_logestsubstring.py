@@ -142,7 +142,6 @@ class Competition():
         print(f"\nFirst index: {result[0]}\nSecond index: {result[1]}\nLength: {result[2]} letters.")
         return result
 
-
     def ton_main_algorithm(self, text_1 = None, text_2 = None):
         """_summary_
         This algorithm use concept of dynamic programming to find longest common substring.
@@ -158,31 +157,31 @@ class Competition():
         if text_1 is None and text_2 is None: text_1, text_2 = self.text_1, self.text_2
 
         text_1_size, text_2_size, result = len(text_1), len(text_2), (-1, -1, 0)
-        base_matrix = [[0] * text_1_size for _ in range(text_2_size)]
-        
-        null_condition = text_1_size == 0 or text_2_size == 0 or len(set(text_1).intersection(set(text_2))) == 0
-        equal_condtion = text_1 == text_2
-        if null_condition:
-            return result
-        if equal_condtion:
+        empty_condition = text_1_size == 0 or text_2_size == 0
+        equal_condition = text_1 == text_2
+
+        if empty_condition: return result
+        if equal_condition:
             result = (0, 0, text_1_size)
             return result
         
+        intersect_condition = len(set(text_1).intersection(set(text_2))) == 0
+
+        if intersect_condition: return result
+
+        base_matrix = [[0] * text_1_size for _ in range(text_2_size)]
 
         for row in range(len((base_matrix))):
-            # print("\n")
             # print("[", end = " ")
             for col in range(len((base_matrix[row]))):
-
                 if text_1[col] == text_2[row] and (row == 0 or col == 0):
                     base_matrix[row][col] += 1
                 elif text_1[col] == text_2[row]:
-                    if base_matrix[row-1][col-1] > 0:
-                        base_matrix[row][col] = base_matrix[row-1][col-1] + 1
-                    else: base_matrix[row][col] += 1
+                    base_matrix[row][col] = base_matrix[row-1][col-1] + 1
 
                 if base_matrix[row][col] > result[2]:
-                    result = (col - base_matrix[row][col] + 1, row - base_matrix[row][col] + 1, base_matrix[row][col])
-                # print(base_matrix[row][col], end = " ")
-            # print("]\n",)
+                    k, i, j = base_matrix[row][col], col - base_matrix[row][col] + 1, row - base_matrix[row][col] + 1
+                    result = (i, j, k)
+            #     print(base_matrix[row][col], end = " ")
+            # print("]",)
         return result
