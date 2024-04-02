@@ -69,7 +69,6 @@ def find_connected(Graph):
     for i in equivalent:
         Group_id[equivalent[i]]+=Group_id[i]
         Group_id.pop(i)
-    print(Group_id)
 
     for i in Group_id:
         Group_Ans=[[None]*len(Graph) for i in range(len(Graph[0]))]
