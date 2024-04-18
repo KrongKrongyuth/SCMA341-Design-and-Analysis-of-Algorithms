@@ -49,7 +49,7 @@ def print_grid(grid):
         print(row)
 
 def create_component_grid(component, number, size):
-    component_grid = [['None'] * size for _ in range(size)]
+    component_grid = [['_'] * size for _ in range(size)]
     for row, col in component:
         component_grid[row][col] = number
     return component_grid
@@ -69,3 +69,13 @@ def find_connected(grid):
 # How to use
 # You need to use function call find_connected(input_grid) to get the answer
 # Ex. find_connected(example_grid)
+
+graph = [
+    [1,2,2,4,1],
+    [1,2,2,4,4],
+    [1,1,2,2,2],
+    [2,2,2,1,2],
+    [4,4,4,4,2]
+]
+
+find_connected(graph)

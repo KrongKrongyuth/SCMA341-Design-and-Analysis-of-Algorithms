@@ -67,7 +67,7 @@ if __name__ == "__main__":
         # cc.find_connected(start_index = [0,0])
         # end = process_time()
         # kanthong_runtime.append(end - start)
-        sleep(5)
+        # sleep(5)
 
     fig, axs = plt.subplots(3,3)
     fig.suptitle('Algorithm runtime', fontsize = 20)
