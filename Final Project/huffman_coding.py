@@ -46,7 +46,7 @@ def compress(data):
     for char in data:
         compressed_data += huffman_codes[char]
 
-    return compressed_data
+    return (compressed_data, huffman_codes)
 
 def decompress(compressed_data, huffman_tree):
     decompressed_data = ""
@@ -67,7 +67,8 @@ def decompress(compressed_data, huffman_tree):
 # Example usage
 data = "Hello world!"
 compressed_data = compress(data)
-print("Compressed data:", compressed_data)
+print("Compressed data:", compressed_data[0])
 
-decompressed_data = decompress(compressed_data, build_huffman_tree(data))
+decompressed_data = decompress(compressed_data[0], build_huffman_tree(data))
 print("Decompressed data:", decompressed_data)
+print("Huffman codes:", compressed_data[1])
